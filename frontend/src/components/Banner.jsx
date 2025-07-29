@@ -39,7 +39,7 @@ function Banner() {
             <div className="validator-hint hidden">
               Enter valid email address
             </div>
-            <button className="btn  bg-blue-900 mb-12 ml-9">Submit</button>
+            <button className="btn  bg-blue-700 mb-12 ml-9 hover:bg-blue-900 hover:rounded-full transition-all duration-300">Get Started</button>
           </div>
         </div>
         <div className="w-full md:w-1/2  order-1 my-30">

@@ -46,5 +46,40 @@
     "desc": "Lorem ipsum dolor sit amet consectetur adipisicing.",
     "image": "https://images.unsplash.com/photo-1507842217343-583bb7270b66",
     "category": "Free"
+  },
+    {
+    "id": 7,
+    "name": "Atomic Habits",
+    "price": "0",
+    "desc": "An easy & proven way to build good habits & break bad ones.",
+    "image": "https://images.unsplash.com/photo-1588776814546-b44d3b59a5c1"
+  },
+  {
+    "id": 8,
+    "name": "The Alchemist",
+    "price": "0",
+    "desc": "A journey of self-discovery and pursuing your dreams.",
+    "image": "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c"
+  },
+  {
+    "id": 9,
+    "name": "Deep Work",
+    "price": "0",
+    "desc": "Rules for focused success in a distracted world.",
+    "image": "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158"
+  },
+  {
+    "id": 10,
+    "name": "The Psychology of Money",
+    "price": "0",
+    "desc": "Timeless lessons on wealth, greed, and happiness.",
+    "image": "https://images.unsplash.com/photo-1516979187457-637abb4f9353"
+  },
+  {
+    "id": 11,
+    "name": "Wings of Fire",
+    "price": "0",
+    "desc": "Autobiography of Dr. A.P.J. Abdul Kalam, India’s Missile Man.",
+    "image": "https://images.unsplash.com/photo-1544717302-de2939b7ef71"
   }
 ]

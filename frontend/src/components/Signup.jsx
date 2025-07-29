@@ -1,17 +1,49 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom"; // ✅ added useNavigate
 import { useForm } from "react-hook-form";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { useAuth } from "../context/AuthProvider";
 
 function Signup() {
+  const [authUser, setAuthUser] = useAuth();
+  const navigate = useNavigate(); // ✅ required
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log("Signup data:", data);
-    // TODO: Add your signup API logic here
+  // ✅ Auto-redirect if already logged in
+  useEffect(() => {
+    if (authUser) {
+      navigate("/");
+    }
+  }, [authUser]);
+
+  const onSubmit = async (data) => {
+    const userInfo = {
+      name: data.name,
+      email: data.email,
+      password: data.password,
+    };
+
+    try {
+      const res = await axios.post("http://localhost:4001/user/signup", userInfo);
+      if (res.data) {
+        toast.success("Signup successful!");
+        localStorage.setItem("Users", JSON.stringify(res.data.user));
+        setAuthUser(res.data.user); // ✅ update auth context
+        navigate("/"); // ✅ redirect to homepage
+      }
+    } catch (error) {
+      if (error.response?.data?.message) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error("Signup failed. Please try again.");
+      }
+    }
   };
 
   return (

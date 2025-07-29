@@ -1,17 +1,44 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { useAuth } from "../context/AuthProvider";
 
 function Login() {
+  const navigate = useNavigate();
+  const [authUser, setAuthUser] = useAuth(); // ✅ context
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log("Login data:", data);
-    // TODO: Add your login API logic here
+  // ✅ Automatically redirect if already logged in
+  useEffect(() => {
+    if (authUser) {
+      navigate("/");
+    }
+  }, [authUser]);
+
+  const onSubmit = async (data) => {
+    const userInfo = {
+      email: data.email,
+      password: data.password,
+    };
+
+    try {
+      const res = await axios.post("http://localhost:4001/user/login", userInfo);
+      if (res.data) {
+        toast.success("Logged in Successfully");
+        localStorage.setItem("Users", JSON.stringify(res.data.user));
+        setAuthUser(res.data.user); // ✅ trigger useEffect to redirect
+      }
+    } catch (err) {
+      console.log(err);
+      toast.error("Login failed. Please check your credentials.");
+    }
   };
 
   return (

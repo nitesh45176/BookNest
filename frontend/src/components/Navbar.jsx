@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Login from "./Login";
 import { Link } from "react-router-dom";
+import { useAuth } from "../context/AuthProvider";
+import Logout from "./Logout";
 
 function Navbar() {
+ const [authUser, setAuthUser] = useAuth(); 
+ 
    
   const [theme, setTheme] = useState(localStorage.getItem("theme")? localStorage.getItem("theme") : "light" )
   const element = document.documentElement;
@@ -145,9 +149,11 @@ function Navbar() {
                 </svg>
               </label>
             </div>
+
+            {authUser ? (<Logout/>) : (
            <Link to="/login" className="bg-blue-900 px-3 py-2 rounded-md hover:bg-slate-800 duration-300 cursor-pointer ml-5">
               Login
-           </Link>
+           </Link>)}
           </div>
         </div>
       </div>
